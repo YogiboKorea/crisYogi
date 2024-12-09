@@ -13,7 +13,7 @@ app.post('/upload', async (req, res) => {
 
         // Base64 디코딩
         const base64Data = image.replace(/^data:image\/png;base64,/, '');
-        const tempFilePath = `/web/img//ftp_event/${filename}`;
+        const tempFilePath = `/web/img/ftp_event/${filename}`;
         fs.writeFileSync(tempFilePath, base64Data, 'base64');
 
         // FTP 업로드
@@ -27,7 +27,7 @@ app.post('/upload', async (req, res) => {
                 password: process.env.FTP_PASSWORD,
                 secure: true
             });
-            await client.uploadFrom(tempFilePath, `/web/img//ftp_event/${filename}`);
+            await client.uploadFrom(tempFilePath, `/web/img/ftp_event/${filename}`);
             res.json({
                 success: true,
                 url: `http://yogibo.kr/${filename}`
